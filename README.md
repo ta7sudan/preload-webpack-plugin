@@ -6,6 +6,8 @@
 
 ![preloads-plugin-compressor](https://cloud.githubusercontent.com/assets/110953/22451103/7700b812-e720-11e6-89e8-a6d4e3533159.png)
 
+forked from [preload-webpack-plugin](https://github.com/GoogleChromeLabs/preload-webpack-plugin), support `crossorigin`.
+
 A webpack plugin for automatically wiring up asynchronous (and other types) of JavaScript
 chunks using `<link rel='preload'>`. This helps with lazy-loading.
 
@@ -39,13 +41,13 @@ This module requires webpack 2.2.0 and above. It also requires that you're using
 First, install the package as a dependency in your `package.json`:
 
 ```sh
-$ npm install --save-dev preload-webpack-plugin
+$ npm install --save-dev @lowb/preload-webpack-plugin
 ```
 
 Alternatively, using `yarn`:
 
 ```sh
-$ yarn add -D preload-webpack-plugin
+$ yarn add -D @lowb/preload-webpack-plugin
 ```
 
 ## Usage
@@ -97,6 +99,9 @@ plugins: [
       if (/\.woff$/.test(entry)) return 'font';
       if (/\.png$/.test(entry)) return 'image';
       return 'script';
+    },
+    crossorigin(entry) {
+      if (/\.(js|css)$/.test(entry)) return 'anonymous';
     }
   })
 ]

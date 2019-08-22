@@ -84,6 +84,17 @@ class PreloadPlugin {
         if (attributes.as === 'font') {
           attributes.crossorigin = 'anonymous';
         }
+			}
+
+      if (!attributes.crossorigin && options.crossorigin) {
+        if (typeof options.crossorigin === 'string') {
+          attributes.crossorigin = options.crossorigin
+        } else if (typeof options.crossorigin === 'function') {
+          const result = options.crossorigin(href);
+          if (result) {
+            attributes.crossorigin = result;
+          }
+        }
       }
 
       const linkElementString = createHTMLElementString({
